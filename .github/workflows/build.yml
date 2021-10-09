@@ -1,0 +1,10 @@
+name: Build
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git'
+      - run: 'echo "$PWD/depot_tools" >> $GITHUB_PATH'
+      - run: 'fetch v8'
