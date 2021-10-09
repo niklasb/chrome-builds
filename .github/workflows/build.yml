@@ -8,3 +8,7 @@ jobs:
       - run: 'git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git'
       - run: 'echo "$PWD/depot_tools" >> $GITHUB_PATH'
       - run: 'fetch v8'
+      - run: 'gn gen out/Default'
+        working-directory: ./v8
+      - run: 'ninja -C out/Default'
+        working-directory: ./v8
