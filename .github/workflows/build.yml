@@ -7,8 +7,16 @@ jobs:
     steps:
       - run: 'git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git'
       - run: 'echo "$PWD/depot_tools" >> $GITHUB_PATH'
-      - run: 'fetch v8'
+      - run: 'fetch --nohooks chromium'
+
+      - run: './build/install-build-deps.sh'
+        working-directory: ./src
+
+      - run: 'gclient runhooks'
+        working-directory: ./src
+
       - run: 'gn gen out/Default'
-        working-directory: ./v8
-      - run: 'ninja -C out/Default'
-        working-directory: ./v8
+        working-directory: ./src
+
+      - run: 'ninja -j4 -C out/Default'
+        working-directory: ./src
